@@ -1,0 +1,18 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+
+	<plugin-info>
+		<description>${project.description}</description>
+		<version>${project.version}</version>
+		<vendor name="${project.organization.name}" url="${project.organization.url}" />
+	</plugin-info>
+
+	<resource type="i18n" name="Find and replace in file" location="nhb.bamboo.plugins.fnr.en" />
+
+	<taskType name="Find and replace text in file" class="nhb.bamboo.plugins.fnr.FNRTask" key="fnr">
+		<description>Find and replace text in file</description>
+		<category name="variables" />
+		<configuration class="nhb.bamboo.plugins.fnr.FNRConfigurator" />
+		<resource type="freemarker" name="edit" location="editFNR.ftl" />
+	</taskType>
+
+</atlassian-plugin>

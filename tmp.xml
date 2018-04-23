@@ -1,0 +1,65 @@
+<atlassian-plugin key="com.atlassian.bamboo.plugins.xcode.bamboo-xcode-plugin" name="Bamboo iOS, Cocoa and Xcode Support" plugins-version="2">
+	<plugin-info>
+		<description>Bamboo support for iOS and Cocoa Xcode projects</description>
+		<version>6.1.2</version>
+		<vendor name="Atlassian" url="http://www.atlassian.com/" />
+	</plugin-info>
+	<web-resource key="fastlane-task" name="fastlane-task">
+		<dependency>com.atlassian.auiplugin:aui-help</dependency>
+		<resource type="download" name="fastlane-task.css" location="com/atlassian/bamboo/plugins/xcode/styles/fastlane.less" />
+		<transformation extension="less">
+			<transformer key="less-transformer" />
+		</transformation>
+		<context>bamboo.configuration</context>
+		<context>bamboo.deployment</context>
+	</web-resource>
+	<resource type="i18n" name="com.atlassian.bamboo.plugins.xcode" location="com.atlassian.bamboo.plugins.xcode.i18n" />
+	<taskType key="unlockkeychain" name="Unlock Keychain" class="com.atlassian.bamboo.plugins.xcode.keychain.UnlockKeychainTaskType">
+		<description>Unlocks a specific Mac OS X keychain. Useful when a certificate is not stored in the default keychain.</description>
+		<configuration class="com.atlassian.bamboo.plugins.xcode.keychain.UnlockKeychainConfigurator" />
+		<resource type="freemarker" name="edit" location="com/atlassian/bamboo/plugins/xcode/keychain/editUnlockKeychain.ftl" />
+	</taskType>
+	<taskType key="xcodeTaskType" name="Xcode" class="com.atlassian.bamboo.plugins.xcode.build.XCodeTaskType">
+		<description>Build an Xcode project including Cocoa and iOS</description>
+		<executable key="xcode" nameKey="xcode.executableName" pathHelpKey="xcode.pathHelp" />
+		<category name="builder" />
+		<configuration class="com.atlassian.bamboo.plugins.xcode.build.XCodeConfigurator" />
+		<resource type="freemarker" name="edit" location="com/atlassian/bamboo/plugins/xcode/build/editXcodeTask.ftl" />
+	</taskType>
+	<taskType key="fastlaneTaskType" name="Fastlane" class="com.atlassian.bamboo.plugins.xcode.build.FastlaneTaskType">
+		<description>Execute a build using Fastlane</description>
+		<executable key="fastlane" nameKey="fastlane.executableName" pathHelpKey="fastlane.pathHelp" />
+		<capabilityDefaultsHelper class="com.atlassian.bamboo.plugins.xcode.build.FastlaneCapabilityDefaultsHelper" />
+		<exporter class="com.atlassian.bamboo.plugins.xcode.export.FastlaneTaskExporter" />
+		<category name="builder" />
+		<configuration class="com.atlassian.bamboo.plugins.xcode.build.FastlaneConfigurator" />
+		<resource type="freemarker" name="edit" location="com/atlassian/bamboo/plugins/xcode/build/editFastlaneTask.ftl" />
+		<resource type="download" name="icon" location="com/atlassian/bamboo/plugins/xcode/build/fastlaneIcon.png" />
+	</taskType>
+	<taskType key="testflight" name="Upload iOS application to TestFlightApp.com" class="com.atlassian.bamboo.plugins.xcode.testflight.TestFlightTask">
+		<description>Task for uploading an iOS application to TestFlightApp.com and notifying testers.</description>
+		<category name="deployment" />
+		<configuration class="com.atlassian.bamboo.plugins.xcode.testflight.TestFlightTaskConfigurator" />
+		<resource type="freemarker" name="edit" location="com/atlassian/bamboo/plugins/xcode/testflight/editTestflightTask.ftl" />
+		<resource type="freemarker" name="view" location="com/atlassian/bamboo/plugins/xcode/testflight/viewTestFlightTask.ftl" />
+	</taskType>
+	<taskType key="hockeyapp" name="Upload iOS application to HockeyApp" class="com.atlassian.bamboo.plugins.xcode.hockeyapp.UploadTask">
+		<description>Task for uploading an iOS application to HockeyApp and notifying testers.</description>
+		<category name="deployment" />
+		<configuration class="com.atlassian.bamboo.plugins.xcode.hockeyapp.UploadTaskConfigurator" />
+		<resource type="freemarker" name="edit" location="com/atlassian/bamboo/plugins/xcode/hockeyapp/editUploadTask.ftl" />
+		<resource type="download" name="icon" location="com/atlassian/bamboo/plugins/xcode/hockeyapp/icon.png" />
+	</taskType>
+	<taskType key="ocunit-parser-task" name="OCUnit Test Parser" class="com.atlassian.bamboo.plugins.xcode.tests.ocunit.OCUnitTestTaskType">
+		<description>A task that parses test results from a log file produced by the xcodebuild (using OCUnit)</description>
+		<category name="test" />
+		<configuration class="com.atlassian.bamboo.plugins.xcode.tests.ocunit.OCUnitTestTaskConfigurator" />
+		<resource type="freemarker" name="edit" location="com/atlassian/bamboo/plugins/xcode/tests/editOCUnitTestTask.ftl" />
+		<resource type="freemarker" name="view" location="com/atlassian/bamboo/plugins/xcode/tests/viewOCUnitTestTask.ftl" />
+	</taskType>
+	<capabilityType key="xcodeSdkCapabilityTypeModule" name="Xcode SDK"
+		class="com.atlassian.bamboo.plugins.xcode.build.XCodeSDKCapabilityTypeModule" sortOrder="1000">
+		<description>Xcode SDK</description>
+		<resource type="freemarker" name="edit" location="com/atlassian/bamboo/plugins/xcode/build/editXcodeSdkCapability.ftl" />
+	</capabilityType>
+</atlassian-plugin>
