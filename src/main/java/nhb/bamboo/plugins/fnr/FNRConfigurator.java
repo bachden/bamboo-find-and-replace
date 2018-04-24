@@ -20,9 +20,10 @@ import com.atlassian.sal.api.message.I18nResolver;
 @Component
 public class FNRConfigurator extends AbstractTaskConfigurator {
 
+	private final I18nResolver i18nResolver;
+
 	private static final List<String> FIELDS = Arrays
 			.asList(new String[] { "filePath", "find", "nonCaseSensitive", "regex", "replaceWith" });
-	private final I18nResolver i18nResolver;
 
 	@Autowired
 	public FNRConfigurator(@ComponentImport("i18n") final I18nResolver i18nResolver) {
