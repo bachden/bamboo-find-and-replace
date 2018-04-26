@@ -117,19 +117,21 @@ public class FNRTask implements CommonTaskType {
 			for (final VariableDefinitionContext vdc : variables) {
 				map.put(vdc.getKey(), vdc.getValue());
 			}
-			logger.addBuildLogEntry("All variables: " + map);
+			// logger.addBuildLogEntry("All variables: " + map);
 
 			for (String[] group : extractedVariableNameGroups) {
 				String value = map.get(group[1]);
-				logger.addBuildLogEntry("Replace " + group[0] + " by " + value);
+				// logger.addBuildLogEntry("Replace " + group[0] + " by " + value);
 				replaceWithStr = replaceWithStr.replaceAll(normalizeForRegex(group[0]), value);
 			}
-			logger.addBuildLogEntry("Found variables in replacement string, convert: "
-					+ taskContext.getConfigurationMap().get("replaceWith").trim() + " -> " + replaceWithStr);
+			// logger.addBuildLogEntry("Found variables in replacement string, convert: "
+			// + taskContext.getConfigurationMap().get("replaceWith").trim() + " -> " +
+			// replaceWithStr);
 		}
 
-		logger.addBuildLogEntry("Findding " + findStr + " and replace with: " + replaceWithStr + ", case sensitive: "
-				+ !ignoreCase + ", using regex: " + isUsingRegex);
+		// logger.addBuildLogEntry("Findding " + findStr + " and replace with: " +
+		// replaceWithStr + ", case sensitive: "
+		// + !ignoreCase + ", using regex: " + isUsingRegex);
 
 		String strWildcards = taskContext.getConfigurationMap().get("filePath");
 		String[] wildcards = strWildcards.split("\\r?\\n");
